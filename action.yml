@@ -9,6 +9,10 @@ outputs:
   random-number:
     description: "Random number"
     value: ${{ steps.random-number-generator.outputs.random-number }}
+  commit-sha_short:
+    description: "commit sha_short"
+    value: ${{ steps.get-sha-short.outputs.sha_short }}
+
 runs:
   using: "composite"
   steps:
@@ -20,6 +24,14 @@ runs:
     - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
       shell: bash
     - run: goodbye.sh
+      shell: bash
+    -
+      name: Checkout
+      uses: actions/checkout@v4
+    -
+      name: Set commit SHA
+      id: get-sha-short
+      run: echo "::set-output name=sha_short::$(echo ${GITHUB_SHA::7})"
       shell: bash
     -
       name: Listing all files in the repository checked out
