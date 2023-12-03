@@ -32,6 +32,10 @@ runs:
       run: echo "sha_short=$(echo ${GITHUB_SHA::7})" >> $GITHUB_ENV
       shell: bash
     -
+      name: Set repository name
+      run: echo "REPOSITORY_NAME=$(echo ${GITHUB_REPOSITORY##*/})" >> $GITHUB_ENV
+      shell: bash
+    -
       name: Listing all files in the repository checked out
       run: |
         echo "Listing all files in the repository:"
