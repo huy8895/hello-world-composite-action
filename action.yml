@@ -21,3 +21,9 @@ runs:
       shell: bash
     - run: goodbye.sh
       shell: bash
+    -
+      name: Listing all files in the repository checked out
+      run: |
+        echo "Listing all files in the repository:"
+        ls -la
+      shell: bash
